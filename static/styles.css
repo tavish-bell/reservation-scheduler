@@ -1,0 +1,39 @@
+body {
+    display: grid;
+    grid-template:
+      'flash flash' auto
+      'header header' auto
+      'sidebar goals' auto / 30% 70%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .flash {
+    grid-area: flash;
+  }
+  
+  header {
+    grid-area: header;
+  }
+  
+  aside {
+    grid-area: sidebar;
+  }
+  
+  main {
+    grid-area: goals;
+  }
+  
+  .goal-header p,
+  .goal-header form {
+    display: inline-block;
+  }
+  
+  .goal-header p {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+  
+  section {
+    margin-bottom: 95px;
+  }

@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<header>
+  <h1>Goal Tracking Dashboard</h1>
+</header>
+
+<aside>
+  <h2>Create a New Goal</h2>
+  <form action="/goal/new" method="POST">
+    <input type="text" name="title" />
+    <input type="submit" />
+  </form>
+</aside>
+
+<main>
+  <section id="your-goals">
+    <h2>Your Goals</h2>
+    <ul class="goal-list">
+      {% for goal in goals %} {% if not goal.completed %}
+      <li>
+        <div class="goal-header">
+          <p>{{ goal.title }}</p>
+
+          <form action="/goal/{{ goal.id }}/edit" method="POST">
+            <input type="hidden" name="completed" value="true" />
+            <input type="submit" value="Completed!" />
+          </form>
+        </div>
+
+        <details>
+          <summary>Edit Goal</summary>
+          <form action="/goal/{{ goal.id }}/edit" method="POST">
+            <input type="text" name="title" value="{{ goal.title }}" />
+            <input type="submit" />
+          </form>
+        </details>
+      </li>
+      {% endif %} {% endfor %}
+    </ul>
+  </section>
+
+  <section id="completed-goals">
+    <h2>Completed Goals</h2>
+    <ul class="goal-list">
+      {% for goal in goals %} {% if goal.completed %}
+      <li>
+        <div class="goal-header">
+          <p>{{ goal.title }}</p>
+
+          <form action="/goal/{{ goal.id }}/edit" method="POST">
+            <input type="hidden" name="completed" value="false" />
+            <input type="submit" value="Mark Goal as Incomplete" />
+          </form>
+        </div>
+      </li>
+      {% endif %} {% endfor %}
+    </ul>
+  </section>
+</main>
+{% endblock content %}
